@@ -51,9 +51,10 @@ DATABASE_PASSWORD=postgres
 
 ## Migrating the Database
 
-Via Knex
+Run docker-compose to simulate email and upload the database and run knex migrate
 
 ```sh
+docker-compose up -d
 yarn/npx/pnpx knex migrate:latest
 ```
 
@@ -61,7 +62,10 @@ If everything is configured correctly, the tables should already be in the Datab
 
 ## Running the project
 
+Run docker-compose to simulate email and upload the database and run project 'SERVE'
+
 ```sh
+docker-compose up -d
 yarn/npx/pnpx serve
 ```
 
