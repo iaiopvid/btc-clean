@@ -51,7 +51,7 @@ DATABASE_PASSWORD=postgres
 
 ## Migrating the Database
 
-Através do Knex
+Via Knex
 
 ```sh
 yarn/npx/pnpx knex migrate:latest
