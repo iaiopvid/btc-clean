@@ -1,0 +1,9 @@
+.git
+.gihub
+.gitignore
+.vscode
+Dockerfile
+*.yml
+documentation
+node_modules
+npm-debug.log

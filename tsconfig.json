@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist/src",
+    "module": "commonjs",
+    "target": "ESNext",
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "rootDirs": ["./src", "./tests"],
+    "allowJs": true,
+    "strict": false,
+    "checkJs": false,
+    "skipLibCheck": true,
+    "strictPropertyInitialization": false,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "forceConsistentCasingInFileNames": true,
+    "allowSyntheticDefaultImports": true,
+    "types": ["node", "@types/jest", "jest", "reflect-metadata"],
+    "baseUrl": "src",
+    "paths": {
+      "@/tests/*": ["../tests/*"],
+      "@/*": ["*"]
+    }
+  },
+  "include": ["./src", "./tests"],
+  "exclude": ["node_modules", "dist"]
+}

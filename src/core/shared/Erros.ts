@@ -1,0 +1,9 @@
+const Errors = {
+    ALREADY_EXISTS: 'ALREADY_EXISTS',
+    NOT_EXISTS: 'NOT_EXISTS',
+    INCORRECT_PASSWORD: 'INCORRECT_PASSWORD',
+    NO_BALANCE: 'NO_BALANCE',
+    NO_BTC_BALANCE: 'NO_BTC_BALANCE',
+} as const
+
+export default Errors
