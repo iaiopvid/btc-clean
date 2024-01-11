@@ -32,7 +32,8 @@ export class PurchaseBtcWithBalanceController implements IController {
     try {
       const requestData = {
         amount: request.body.amount,
-        id: request.user.id
+        id: request.user.id,
+        email: request.user.email,
       };
       const purchaseBtcWithBalanceUseCase = new PurchaseBtcWithBalanceUseCase(
         this.userRepository,

@@ -33,7 +33,8 @@ export class SellBtcController implements IController {
     try {
       const requestData = {
         amount: request.body.amount,
-        id: request.user.id
+        id: request.user.id,
+        email: request.user.email,
       };
       const sellBtcUseCase = new SellBtcUseCase(this.userRepository, this.btcRepository, this.dealRepository);
       const soldBtc = await sellBtcUseCase.execute(requestData);

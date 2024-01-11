@@ -29,11 +29,11 @@ export class UserRepository implements IUserRepository {
   }
 
   async makeDepositIntoAccount(data: { amount: number | string, id: number | string }): Promise<User> {
-    const accountUpdated = UserModel
+    const depositedAccount = UserModel
       .query()
       .increment('balance', Number(data.amount))
       .findById(data.id)
-    return accountUpdated
+    return depositedAccount
   }
 
   async GetBalanceByIdentifier(id: number | string): Promise<User> {

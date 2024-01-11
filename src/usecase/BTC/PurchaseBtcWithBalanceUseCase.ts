@@ -5,10 +5,12 @@ import { GetPriceBtctUseCase } from './GetPriceBtctUseCase';
 import { IBtcRepository } from '@/core/repositories/IBtcRepository';
 import BtcDomain from '@/core/domain/BTC/BtcDomain';
 import { IDealRepository } from '@/core/repositories/IDealRepository';
+import sendMail from '@/infra/email/nodemailer';
 
 export class PurchaseBtcWithBalanceUseCase implements IUseCase<{
   amount: number | string;
-  id: number | string
+  id: number | string,
+  email: string
 }, BtcDomain | string> {
   constructor(
     private readonly userRepository: IUserRepository,
@@ -18,7 +20,8 @@ export class PurchaseBtcWithBalanceUseCase implements IUseCase<{
 
   public async execute(data: {
     amount: number | string;
-    id: number | string
+    id: number | string,
+    email: string
   }): Promise<BtcDomain | string> {
     const currentyBalance = await this.userRepository.GetBalanceByIdentifier(data.id)
     if (Number(data.amount) > Number(currentyBalance) ) {
@@ -45,6 +48,14 @@ export class PurchaseBtcWithBalanceUseCase implements IUseCase<{
         rate: btcSellPrice,
         operation: 'purchase'
       })
+      await sendMail(
+        process.env.MAIL_SYSTEM,
+        data.email,
+        'Purchase Bitcoin',
+        `<h1>PURCHASE BTC COMPLETED</H1>
+          <p>BTC purchase: ${Number(btcSellPrice)}</p>
+          <p>Investiment: $$ ${data.amount}</p>`,
+      );
     }
 
     return purchasedBtc

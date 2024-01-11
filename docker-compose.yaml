@@ -1,48 +1,48 @@
 version: '3.8'
 services:
-  api:
-    build:
-      dockerfile: Dockerfile
-      context: .
-    depends_on:
-      - database
-    environment:
-      DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
-      # DATABASE_HOST: postgres
-      # DATABASE_PORT: 5432
-      # DATABASE_NAME: postgres
-      # DATABASE_USER: postgres
-      # DATABASE_PASSWORD: postgres
-      # NODE_ENV: development
-      PORT: 3000
-    ports:
-      - "3000:3000"
-  postgres:
-    image: postgres:latest
-    restart: always
-    environment:
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=deawmspcofdb
-    volumes:
-      - postgres:/var/lib/postgresql/data
-    ports:
-      - '5432:5432'
-    networks:
-      - network
-  pgadmin:
-    container_name: pgadmin4_container
-    image: dpage/pgadmin4
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: root
-    ports:
-      - "5050:80"
-    depends_on:
-      - postgres
-    networks:
-      - network
+  # api:
+  #   build:
+  #     dockerfile: Dockerfile
+  #     context: .
+  #   depends_on:
+  #     - database
+  #   environment:
+  #     DATABASE_URL: postgres://postgres:postgres@postgres:5432/postgres
+  #     # DATABASE_HOST: postgres
+  #     # DATABASE_PORT: 5432
+  #     # DATABASE_NAME: postgres
+  #     # DATABASE_USER: postgres
+  #     # DATABASE_PASSWORD: postgres
+  #     # NODE_ENV: development
+  #     PORT: 3000
+  #   ports:
+  #     - "3000:3000"
+  # postgres:
+  #   image: postgres:latest
+  #   restart: always
+  #   environment:
+  #     - POSTGRES_USER=postgres
+  #     - POSTGRES_PASSWORD=postgres
+  #     - POSTGRES_DB=deawmspcofdb
+  #   volumes:
+  #     - postgres:/var/lib/postgresql/data
+  #   ports:
+  #     - '5432:5432'
+  #   networks:
+  #     - network
+  # pgadmin:
+  #   container_name: pgadmin4_container
+  #   image: dpage/pgadmin4
+  #   restart: always
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
+  #     PGADMIN_DEFAULT_PASSWORD: root
+  #   ports:
+  #     - "5050:80"
+  #   depends_on:
+  #     - postgres
+  #   networks:
+  #     - network
   mailhog:
     image: mailhog/mailhog
     logging:
@@ -50,10 +50,10 @@ services:
     ports:
     - 1025:1025 # smtp server
     - 8025:8025 # web ui
-    networks:
-      - network
-volumes:
-  postgres:
-networks:
-  network:
-    driver: bridge
+#     networks:
+#       - network
+# volumes:
+#   postgres:
+# networks:
+#   network:
+#     driver: bridge

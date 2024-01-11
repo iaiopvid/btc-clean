@@ -31,7 +31,8 @@ export class MakeDepositIntoAccountController implements IController {
     try {
       const requestData = {
         amount: request.body.amount,
-        id: request.user.id
+        id: request.user.id,
+        email: request.user.email
       };
       const makeDepositIntoAccount = new MakeDepositIntoAccountUseCase(this.userRepository, this.dealRepository);
       const updatedAccount = await makeDepositIntoAccount.execute(requestData);

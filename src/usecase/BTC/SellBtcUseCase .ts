@@ -5,10 +5,12 @@ import { GetPriceBtctUseCase } from './GetPriceBtctUseCase';
 import { IBtcRepository } from '@/core/repositories/IBtcRepository';
 import { IDealRepository } from '@/core/repositories/IDealRepository';
 import BtcDomain from '@/core/domain/BTC/BtcDomain';
+import sendMail from '@/infra/email/nodemailer';
 
 export class SellBtcUseCase implements IUseCase<{
   amount: number | string;
-  id: number | string
+  id: number | string,
+  email: string,
 }, BtcDomain | string> {
   constructor(
     private readonly userRepository: IUserRepository,
@@ -18,7 +20,8 @@ export class SellBtcUseCase implements IUseCase<{
 
   public async execute(data: {
     amount: number | string;
-    id: number | string
+    id: number | string,
+    email: string,
   }): Promise<BtcDomain | string> {
     const getPriceBtcUseCase = new GetPriceBtctUseCase();
     const btcPrice = await getPriceBtcUseCase.execute();
@@ -52,6 +55,14 @@ export class SellBtcUseCase implements IUseCase<{
         rate: btcSellPrice,
         operation: 'rescue'
       })
+      await sendMail(
+        process.env.MAIL_SYSTEM,
+        data.email,
+        'Sell Bitcoin',
+        `<h1>SELL BTC COMPLETED</H1>
+          <p>BTC sell: ${Number(sellBtcValue)}</p>
+          <p>Rescue value: $$ ${data.amount}</p>`,
+      );
     }
 
     return soldBtc
